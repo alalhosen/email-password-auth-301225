@@ -1,20 +1,40 @@
 const Register = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    console.log(email, password);
+  };
+
   return (
     <div>
-      <div className="mx-auto">
+      <div className="mx-auto md:w-1/2">
         <h2 className="text 3xl underline">Please Register</h2>
-        <form>
+        <form onSubmit={handleRegister}>
+          <h1>Email</h1>
           <input
-            className="mb-2"
-            placeholder="email"
+            className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg"
+            placeholder="Email Address"
             type="email"
             name="email"
             id=""
           />
           <br />
-          <input placeholder="password" type="password" name="password" id="" />
+          <h1>Password</h1>
+          <input
+            className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg"
+            placeholder="Password"
+            type="password"
+            name="password"
+            id=""
+          />
           <br />
-          <input type="submit" value="Register" />
+          <input
+            className="btn btn-secondary w-3/4"
+            type="submit"
+            value="Register"
+          />
         </form>
       </div>
     </div>
