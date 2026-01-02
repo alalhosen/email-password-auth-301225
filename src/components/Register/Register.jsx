@@ -1,3 +1,5 @@
+import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
+
 const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
@@ -5,6 +7,10 @@ const Register = () => {
     const password = e.target.password.value;
 
     console.log(email, password);
+
+    // create user
+    createUserWithEmailAndPassword(auth)
+
   };
 
   return (
