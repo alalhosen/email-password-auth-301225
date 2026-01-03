@@ -2,6 +2,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 
 const Register = () => {
+
+
+
   const handleRegister = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
