@@ -45,7 +45,7 @@ const Register = () => {
         <form onSubmit={handleRegister}>
           <h1>Email</h1>
           <input
-            className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg"
+            className="mb-2 w-full bg-gray-200 py-2 px-4 rounded-lg"
             placeholder="Email Address"
             type="email"
             name="email"
@@ -54,23 +54,36 @@ const Register = () => {
           />
           <br />
           <h1>Password</h1>
-          <input
-            className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg"
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
-            name="password"
-            required
-            id=""
-          />
-          <span onClick={() => setShowPassword(!showPassword)}>
-            {
-              showPassword?<PiEyeSlash></PiEyeSlash>:<PiEyeLight></PiEyeLight>
-            }
-          </span>
+          <div className="relative border mb-2">
+            <input
+              className="w-full bg-gray-200 py-2 px-4 rounded-lg"
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              required
+              id=""
+            />
+            <span
+              className="absolute top-3 right-5"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <PiEyeSlash></PiEyeSlash>
+              ) : (
+                <PiEyeLight></PiEyeLight>
+              )}
+            </span>
+          </div>
           <br />
-
+          <div className="mb-2">
+            <input type="checkbox" name="terms" id="terms" />
+            <label className="ml-2" htmlFor="terms">
+              Accept our <a href="">Terms and Condition</a>
+            </label>
+          </div>
+          <br />
           <input
-            className="btn btn-secondary w-3/4"
+            className="btn btn-secondary w-full"
             type="submit"
             value="Register"
           />
