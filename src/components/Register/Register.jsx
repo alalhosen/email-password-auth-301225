@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useState } from "react";
+import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
 
 const Register = () => {
   const [registerError, setRegisterError] = useState("");
@@ -56,17 +57,18 @@ const Register = () => {
           <input
             className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg"
             placeholder="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             required
             id=""
           />
-          <span onClick={() => setShowPassword(!showPassword)}>show</span>
+          <span onClick={() => setShowPassword(!showPassword)}>
+            {
+              showPassword?<PiEyeSlash></PiEyeSlash>:<PiEyeLight></PiEyeLight>
+            }
+          </span>
           <br />
 
-          <input className="mb-2 w-3/4 bg-gray-200 py-2 px-4 rounded-lg" type="password" name="" id="" />
-
-          <br />
           <input
             className="btn btn-secondary w-3/4"
             type="submit"
