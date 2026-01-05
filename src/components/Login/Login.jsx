@@ -1,4 +1,34 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
+import { useState } from "react";
+
 const Login = () => {
+  const [loginError, setLoginError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+
+       //reset error and Success
+    setRegisterError("");
+    setSuccess("");
+
+
+    // add validation
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result.user);
+        setSuccess("User Login in Successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoginError(error.message);
+      });
+  };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -11,13 +41,14 @@ const Login = () => {
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
+          <form className="card-body" onClick={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
                 required
@@ -29,6 +60,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="password"
                 className="input input-bordered"
                 required
@@ -43,6 +75,10 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          {registerError && (
+            <p className="text-red-500 font-semibold">{registerError}</p>
+          )}
+          {success && <p className="text-green-500 font-semibold">{success}</p>}
         </div>
       </div>
     </div>

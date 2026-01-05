@@ -15,7 +15,7 @@ const Register = () => {
     const accepted =e.target.terms.checked;
     console.log(email, password , accepted);
 
-    //reset error
+    //reset error and Success
     setRegisterError("");
     setSuccess("");
 
