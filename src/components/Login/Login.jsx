@@ -1,9 +1,10 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleLogin = (e) => {
@@ -25,9 +26,14 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
-        setLoginError(error.message);
+        setRegisterError(error.message);
       });
   };
+
+const handleForgetPassword=e=>{
+  console.log('send reset email')
+}
+
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -66,7 +72,7 @@ const Login = () => {
                 required
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <a onClick={handleForgetPassword} href="#" className="label-text-alt link link-hover">
                   Forgot password?
                 </a>
               </label>
@@ -79,6 +85,7 @@ const Login = () => {
             <p className="text-red-500 font-semibold">{registerError}</p>
           )}
           {success && <p className="text-green-500 font-semibold">{success}</p>}
+        <p>New to this website? Please <Link to="/register">Register</Link></p>
         </div>
       </div>
     </div>
