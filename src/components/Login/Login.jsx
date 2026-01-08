@@ -35,8 +35,13 @@ const handleForgetPassword=()=>{
   const email =emailRef.current.value;
   if(!email){
 
-    console.log('send reset email',emailRef.current.value)
+    console.log('Please provide an email',emailRef.current.value)
     return;
+  }
+  else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))
+  {
+console.log('please write a valid email')
+return;
   }
 }
 
