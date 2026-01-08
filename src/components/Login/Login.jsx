@@ -1,4 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -6,7 +9,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [registerError, setRegisterError] = useState("");
   const [success, setSuccess] = useState("");
-  const emailRef=useRef(null);
+  const emailRef = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,10 +17,9 @@ const Login = () => {
     const password = e.target.password.value;
     console.log(email, password);
 
-       //reset error and Success
+    //reset error and Success
     setRegisterError("");
     setSuccess("");
-
 
     // add validation
     signInWithEmailAndPassword(auth, email, password)
@@ -31,20 +33,27 @@ const Login = () => {
       });
   };
 
-const handleForgetPassword=()=>{
-  const email =emailRef.current.value;
-  if(!email){
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      console.log("Please provide an email", emailRef.current.value);
+      return;
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
+      console.log("please write a valid email");
+      return;
+    }
 
-    console.log('Please provide an email',emailRef.current.value)
-    return;
-  }
-  else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))
-  {
-console.log('please write a valid email')
-return;
-  }
-}
-
+    // send validation email
+    sendPasswordResetEmail(auth, email)
+    .then(()=>{
+      alert('Please check your email')
+    })
+    .catch(error=>{
+console.log(error)
+    })
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -84,7 +93,11 @@ return;
                 required
               />
               <label className="label">
-                <a onClick={handleForgetPassword} href="#" className="label-text-alt link link-hover">
+                <a
+                  onClick={handleForgetPassword}
+                  href="#"
+                  className="label-text-alt link link-hover"
+                >
                   Forgot password?
                 </a>
               </label>
@@ -97,7 +110,9 @@ return;
             <p className="text-red-500 font-semibold">{registerError}</p>
           )}
           {success && <p className="text-green-500 font-semibold">{success}</p>}
-        <p>New to this website? Please <Link to="/register">Register</Link></p>
+          <p>
+            New to this website? Please <Link to="/register">Register</Link>
+          </p>
         </div>
       </div>
     </div>
