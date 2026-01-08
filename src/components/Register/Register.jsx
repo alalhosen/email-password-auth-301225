@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useState } from "react";
 import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
@@ -13,8 +16,8 @@ const Register = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const accepted =e.target.terms.checked;
-    console.log(email, password , accepted);
+    const accepted = e.target.terms.checked;
+    console.log(email, password, accepted);
 
     //reset error and Success
     setRegisterError("");
@@ -26,9 +29,8 @@ const Register = () => {
     } else if (!/[A-Z]/.test(password)) {
       setRegisterError("Your password should have at least one upper case.");
       return;
-    }
-    else if(!accepted){
-      setRegisterError('Please accept our terms and conditions!')
+    } else if (!accepted) {
+      setRegisterError("Please accept our terms and conditions!");
       return;
     }
 
@@ -37,6 +39,11 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         setSuccess("User Created Successfully.");
+
+        //send verification email:
+        sendEmailVerification(result.user).then(() => {
+          alert("Please check your email and verity your account");
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -98,7 +105,12 @@ const Register = () => {
           <p className="text-red-500 font-semibold">{registerError}</p>
         )}
         {success && <p className="text-green-500 font-semibold">{success}</p>}
-        <p>Already have an account? Please <Link className="text-green-500" to="/login">Login</Link></p>
+        <p>
+          Already have an account? Please{" "}
+          <Link className="text-green-500" to="/login">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
