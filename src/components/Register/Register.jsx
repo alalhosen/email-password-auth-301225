@@ -14,6 +14,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const accepted = e.target.terms.checked;
@@ -57,6 +58,15 @@ const Register = () => {
         <h2 className="text 3xl underline">Please Register</h2>
         <form onSubmit={handleRegister}>
           <h1>Email</h1>
+          <input
+            className="mb-2 w-full bg-gray-200 py-2 px-4 rounded-lg"
+            placeholder="Your Name"
+            type="text"
+            name="name"
+            required
+            id=""
+          />
+          <br />
           <input
             className="mb-2 w-full bg-gray-200 py-2 px-4 rounded-lg"
             placeholder="Email Address"
