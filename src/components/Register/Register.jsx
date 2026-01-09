@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { useState } from "react";
@@ -40,6 +41,13 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         setSuccess("User Created Successfully.");
+
+        //update profile
+        updateProfile(result.user,{
+          displayName:name,
+          photoURL:"https://example.com/jane-q-user/profile.jpg"
+        })
+
 
         //send verification email:
         sendEmailVerification(result.user).then(() => {
