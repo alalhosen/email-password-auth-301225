@@ -13,6 +13,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
@@ -25,11 +26,10 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
-        if(result.user.emailVerified){
+        if (result.user.emailVerified) {
           setSuccess("User Login in Successfully.");
-        }
-        else{
-          alert('Please verify your email address')
+        } else {
+          alert("Please verify your email address");
         }
       })
       .catch((error) => {
@@ -52,12 +52,12 @@ const Login = () => {
 
     // send validation email
     sendPasswordResetEmail(auth, email)
-    .then(()=>{
-      alert('Please check your email')
-    })
-    .catch(error=>{
-console.log(error)
-    })
+      .then(() => {
+        alert("Please check your email");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

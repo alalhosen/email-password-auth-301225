@@ -19,7 +19,7 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const accepted = e.target.terms.checked;
-    console.log(email, password, accepted);
+    console.log(name, email, password, accepted);
 
     //reset error and Success
     setRegisterError("");
@@ -47,8 +47,8 @@ const Register = () => {
           displayName: name,
           photoURL: "https://example.com/jane-q-user/profile.jpg",
         })
-        .then(() => console.log("profile update"))
-        .catch()
+          .then(() => console.log("profile update"))
+          .catch();
 
         //send verification email:
         sendEmailVerification(result.user).then(() => {
@@ -74,7 +74,7 @@ const Register = () => {
             name="name"
             required
             id=""
-            />
+          />
           <br />
           <h1>Email</h1>
           <input
