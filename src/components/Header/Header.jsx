@@ -40,7 +40,7 @@ const Header = () => {
 
             </ul>
           </div>
-          <a className="btn btn-ghost bg-lime-500 rounded-full italic text-2xl">Email Auth</a>
+          <a className="btn btn-ghost bg-lime-500 rounded-full italic text-2xl ml-4">Email Auth</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

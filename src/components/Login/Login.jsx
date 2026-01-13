@@ -115,8 +115,8 @@ const Login = () => {
             <p className="text-red-500 font-semibold">{registerError}</p>
           )}
           {success && <p className="text-green-500 font-semibold">{success}</p>}
-          <p>
-            New to this website? Please <Link to="/register">Register</Link>
+          <p className="p-2">
+            New to this website? Please <Link className="text-green-500" to="/register">Register</Link>
           </p>
         </div>
       </div>
